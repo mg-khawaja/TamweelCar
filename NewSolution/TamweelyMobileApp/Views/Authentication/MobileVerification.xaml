@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#F0F0F0"
+             xmlns:i18n="clr-namespace:TamweelyMobileApp.Helpers;assembly=TamweelyMobileApp" 
+             xmlns:syncmaskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+             xmlns:otpcontrol="clr-namespace:OTPControl;assembly=OTPControl"
+             x:Class="TamweelyMobileApp.Views.MobileVerification" NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+
+        <Grid VerticalOptions="FillAndExpand">
+            <Button HorizontalOptions="Start" x:Name="backButton" WidthRequest="20" VerticalOptions="Start" Margin="24,15"
+                    Command="{Binding GoBackCommand}" BackgroundColor="Transparent"/>
+            <Image Source="tamweeli_icon.png" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,60,0,0" 
+                   HeightRequest="180"/>
+            <Grid VerticalOptions="CenterAndExpand">
+                <Frame BackgroundColor="White" CornerRadius="10" VerticalOptions="CenterAndExpand" Margin="24,0,24,30" Padding="24,10,24,44"
+                       HasShadow="False">
+                    <StackLayout>
+                        <Label Text="{i18n:Translate Please_enter_the_4_digit_OTP_code_sent_on}" HorizontalOptions="Center" 
+                               FontFamily="Roboto" TextColor="#454545"
+                               FontSize="18" HorizontalTextAlignment="Center" Margin="0,10,0,15"/>
+                        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Frame Padding="0" HasShadow="False" CornerRadius="5" HorizontalOptions="CenterAndExpand" HeightRequest="45">
+                                <syncmaskededit:SfMaskedEdit BackgroundColor="#F0F0F0" BorderColor="Transparent" WidthRequest="45" HeightRequest="45"
+                                                             Mask="0" HorizontalTextAlignment="Center" PromptChar=" " Keyboard="Numeric"
+                                                             x:Name="firstPin" Value="{Binding FirstPin}"/>
+                            </Frame>
+                            <Frame Padding="0" HasShadow="False" CornerRadius="5" HorizontalOptions="CenterAndExpand" HeightRequest="45">
+                                <syncmaskededit:SfMaskedEdit BackgroundColor="#F0F0F0" BorderColor="Transparent" WidthRequest="45" HeightRequest="45"
+                                                             Mask="0" HorizontalTextAlignment="Center" PromptChar=" " Keyboard="Numeric"
+                                                             x:Name="secondPin" Value="{Binding SecondPin}"/>
+                            </Frame>
+                            <Frame Padding="0" HasShadow="False" CornerRadius="5" HorizontalOptions="CenterAndExpand" HeightRequest="45">
+                                <syncmaskededit:SfMaskedEdit BackgroundColor="#F0F0F0" BorderColor="Transparent" WidthRequest="45" HeightRequest="45"
+                                                             Mask="0" HorizontalTextAlignment="Center" PromptChar=" " Keyboard="Numeric"
+                                                             x:Name="thirdPin" Value="{Binding ThirdPin}"/>
+                            </Frame>
+                            <Frame Padding="0" HasShadow="False" CornerRadius="5" HorizontalOptions="CenterAndExpand" HeightRequest="45">
+                                <syncmaskededit:SfMaskedEdit BackgroundColor="#F0F0F0" BorderColor="Transparent" WidthRequest="45" HeightRequest="45"
+                                                             Mask="0" HorizontalTextAlignment="Center" PromptChar=" " Keyboard="Numeric"
+                                                             x:Name="forthPin" Value="{Binding ForthPin}"/>
+                            </Frame>
+                        </StackLayout>-->
+                        <StackLayout>
+                            <otpcontrol:CustomOtpControl FillBorderColor="{StaticResource Primary}" EmptyBorderColor="Gray"   
+                                             OtpLength="4" HorizontalOptions="FillAndExpand" HorizontalSpacing="20"
+                                             Margin="20,40,0,20" InputTransparent="False" x:Name="controlOTP" SelectedOtp="{Binding SelectedOTP}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" x:Name="Next_btn">
+                    <Image Source="" x:Name="arrowBack" WidthRequest="60" HeightRequest="60"/>
+                    <Image Source="" x:Name="arrowWhite" WidthRequest="22" HeightRequest="22" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Grid>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding Busy}">
+                <ActivityIndicator HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                   IsRunning="True" IsVisible="true" IsEnabled="true"
+                                   />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

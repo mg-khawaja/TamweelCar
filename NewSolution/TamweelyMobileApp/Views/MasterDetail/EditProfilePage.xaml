@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:syncmaskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+             xmlns:i18n="clr-namespace:TamweelyMobileApp.Helpers" 
+             x:Class="TamweelyMobileApp.Views.MasterDetail.EditProfilePage"
+             NavigationPage.HasNavigationBar="False" BackgroundColor="#F0F0F0"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <StackLayout Padding="0" Spacing="0">
+                    <Frame Padding="0" Margin="0">
+                        <StackLayout Orientation="Horizontal" Padding="15,10" BackgroundColor="White">
+                            <Button HorizontalOptions="Start" x:Name="backButton" WidthRequest="20" BackgroundColor="Transparent"
+                                Clicked="backButton_Clicked"/>
+                            <Label Text="{i18n:Translate edit_profile}" TextColor="Black" FontSize="21" HorizontalTextAlignment="Center" 
+                                       VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                            <Label HorizontalOptions="End" x:Name="deleteBtn" BackgroundColor="Transparent" HorizontalTextAlignment="Center"
+                                   TextColor="Red" FontSize="12" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{i18n:Translate delete}"/>
+                                        <Span Text="&#10;"/>
+                                        <Span Text="{i18n:Translate account}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DeleteCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+                    <Grid VerticalOptions="Start" Margin="24,5">
+                        <Frame BackgroundColor="White" CornerRadius="10" VerticalOptions="CenterAndExpand" Margin="0,0,0,30" Padding="24,10,24,44"
+                       HasShadow="False">
+                            <StackLayout>
+                                <Label Text="{i18n:Translate Name}"   Padding="0,10,0,0" FontFamily="Roboto" TextColor="#454545"></Label>
+                                <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" BackgroundColor="#F0F0F0">
+                                    <syncmaskededit:SfMaskedEdit BackgroundColor="#F0F0F0" BorderColor="Transparent"
+                                                         Value="{Binding Name}" x:Name="nameEntry" 
+                                                                 HorizontalTextAlignment="{Binding TextAlignment}"/>
+                                </Frame>
+                                <Label Text="{i18n:Translate Mobile}"   Padding="0,10,0,0" FontFamily="Roboto" TextColor="#454545"></Label>
+                                <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" BackgroundColor="#F0F0F0">
+                                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                                        <!--<ComboBox:SfComboBox DisplayMemberPath="dial_code" x:Name="CountryCodes" VerticalOptions="Start" 
+                                                     HeightRequest="45" TextColor="Black" IgnoreDiacritic="True"
+                                                     FontFamily="Roboto" BackgroundColor="#F0F0F0" DropDownBackgroundColor="White" 
+                                                     DataSource="{Binding CountryCodes}" ShowClearButton="False" ShowBorder="False" 
+                                                     WidthRequest="90">
+                                </ComboBox:SfComboBox>-->
+                                        <Label Text="{Binding SelectedCountryCode.dial_code}" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" 
+                                               TextColor="Black" HorizontalTextAlignment="Start">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectCountryCodeCommand}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <BoxView BackgroundColor="Black" WidthRequest="1" HeightRequest="25" VerticalOptions="Center"
+                                         Margin="0,0,10,0"/>
+                                        <syncmaskededit:SfMaskedEdit x:Name="phoneEntry" Mask="00000000000" PromptChar=" " Watermark="12345678901"
+                                                         BackgroundColor="#F0F0F0" BorderColor="Transparent" Keyboard="Numeric"
+                                                             HorizontalOptions="FillAndExpand" Value="{Binding Phone}" 
+                                                                     HorizontalTextAlignment="{Binding TextAlignment}" IsReadOnly="True"/>
+                                    </StackLayout>
+
+                                </Frame>
+                                <Label Text="{i18n:Translate MobileClaim}" FontSize="11"  Padding="0,0,0,0" FontFamily="Roboto" TextColor="#A4A4A4"/>
+                            </StackLayout>
+                        </Frame>
+                        <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" x:Name="Next_btn">
+                            <Image Source="" x:Name="arrowBack" WidthRequest="60" HeightRequest="60"/>
+                            <Image Source="" x:Name="arrowWhite" WidthRequest="22" HeightRequest="22" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="NextBtn_Tapped"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}">
+                    <ActivityIndicator HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                       IsRunning="True" IsVisible="true" IsEnabled="true"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

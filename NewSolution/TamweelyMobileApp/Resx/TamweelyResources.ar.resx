@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="account" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
+  <data name="account_deleted" xml:space="preserve">
+    <value>تم حذف حسابك بنجاح</value>
+  </data>
+  <data name="al" xml:space="preserve">
+    <value>قسط سياره</value>
+  </data>
+  <data name="alert" xml:space="preserve">
+    <value>إنذار</value>
+  </data>
+  <data name="Already_have_an_account" xml:space="preserve">
+    <value>لديك بالفعل حساب ؟</value>
+  </data>
+  <data name="al_error" xml:space="preserve">
+    <value>يجب أن يكون القرض التأجيري أكبر من 0</value>
+  </data>
+  <data name="amount_not_enough" xml:space="preserve">
+    <value>القسط المتاح  لايكفي للحصول على تمويل شراء مركبة ، الرجاء مراجعة الجهة التمويلية</value>
+  </data>
+  <data name="apply" xml:space="preserve">
+    <value>يتقدم</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>عربى</value>
+  </data>
+  <data name="balance_amount" xml:space="preserve">
+    <value>القسط المتاح</value>
+  </data>
+  <data name="balance_claim" xml:space="preserve">
+    <value>هذا حساب تقريبي ، للحصول على رصيد أقساط دقيق ، يجب عليك الاتصال بالمصرف الذي تتعامل معه.</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="car_value" xml:space="preserve">
+    <value>قيمة السيارة</value>
+  </data>
+  <data name="car_value_error" xml:space="preserve">
+    <value>قيمة السيارة لايمكن ان زيد عن ٥٠٠٠٠ ريال</value>
+  </data>
+  <data name="cc" xml:space="preserve">
+    <value>مجموع حد البطاقات الائتمانية</value>
+  </data>
+  <data name="cc_error" xml:space="preserve">
+    <value>لا يمكن أن يكون حد بطاقة الائتمان أقل من الصفر</value>
+  </data>
+  <data name="cc_error_zero" xml:space="preserve">
+    <value>يجب أن يكون الحد الإتماني أكبر من 0</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>اختر اللغة</value>
+  </data>
+  <data name="confirm" xml:space="preserve">
+    <value>أنت على وشك الخروج من التطبيق ، هل ترغب بالمتابعة ؟</value>
+  </data>
+  <data name="confirm_delete" xml:space="preserve">
+    <value>هل ترغب بحذف حسابك ؟</value>
+  </data>
+  <data name="continue" xml:space="preserve">
+    <value>يكمل؟</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="delete_account" xml:space="preserve">
+    <value>حذف &amp;#10؛ الحساب</value>
+  </data>
+  <data name="Did_not_received_the_code" xml:space="preserve">
+    <value>لم تتلق الرمز؟</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>فعله</value>
+  </data>
+  <data name="Dont_have_an_account" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
+  <data name="down_payment" xml:space="preserve">
+    <value>مبلغ الدفعه الاولى</value>
+  </data>
+  <data name="down_payment_perc" xml:space="preserve">
+    <value>الدفعة الأولى</value>
+  </data>
+  <data name="edit_profile" xml:space="preserve">
+    <value>تعديل الملف الشخصي</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>إنجليزي</value>
+  </data>
+  <data name="enter_code" xml:space="preserve">
+    <value>الرجاء إدخال الرمز السري للتحقق!</value>
+  </data>
+  <data name="enter_name" xml:space="preserve">
+    <value>الرجاء إدخال الاسم!</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>تصفية</value>
+  </data>
+  <data name="high_to_low" xml:space="preserve">
+    <value>اعلى سعر الى الاقل</value>
+  </data>
+  <data name="home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="installment" xml:space="preserve">
+    <value>القسط</value>
+  </data>
+  <data name="insurance" xml:space="preserve">
+    <value>مبلغ التامين</value>
+  </data>
+  <data name="insurance_perc" xml:space="preserve">
+    <value>نسبة التأمين</value>
+  </data>
+  <data name="interest" xml:space="preserve">
+    <value>هامش الربح</value>
+  </data>
+  <data name="interest_perc" xml:space="preserve">
+    <value>نسبة الفائدة</value>
+  </data>
+  <data name="invalid_phone" xml:space="preserve">
+    <value>الرجاء إدخال رقم جوال صحيح</value>
+  </data>
+  <data name="LanguageChanged" xml:space="preserve">
+    <value>تغيرت اللغة</value>
+  </data>
+  <data name="last_payment" xml:space="preserve">
+    <value>مبلغ الدفعه الدفعه الاخيره</value>
+  </data>
+  <data name="last_payment_perc" xml:space="preserve">
+    <value>الدفعة الأخيرة</value>
+  </data>
+  <data name="lease_error" xml:space="preserve">
+    <value>قيمة التمويل يجب ان لاتزيد عن ٥٠٠٠٠٠ الف ريال. يجب عليك زياده الدفعه الأولى.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="low_to_high" xml:space="preserve">
+    <value>أقل سعر إلى الأعلى</value>
+  </data>
+  <data name="make" xml:space="preserve">
+    <value>الوكالة</value>
+  </data>
+  <data name="ml" xml:space="preserve">
+    <value>قسط عقاري</value>
+  </data>
+  <data name="ml_error" xml:space="preserve">
+    <value>يجب أن يكون القرض العقاري أكبر من 0</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>رقم الجوال</value>
+  </data>
+  <data name="MobileClaim" xml:space="preserve">
+    <value>لايمكن تغيير رقم الهاتف الجوال بسبب اسم المستخدم الخاص بك</value>
+  </data>
+  <data name="Mobile_Verification" xml:space="preserve">
+    <value>التحقق من الموبايل</value>
+  </data>
+  <data name="monthly_installment" xml:space="preserve">
+    <value>القسط الشهري</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الإسم</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="no_of_months" xml:space="preserve">
+    <value>عدد الشهور</value>
+  </data>
+  <data name="no_vehicles" xml:space="preserve">
+    <value>عذراً، لايوجد سيارات مطابقة لحد مبلغ القسط المتاح، الرجاء الرجوع للخلف وادخال بيانات اخرى</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>موافق</value>
+  </data>
+  <data name="pl" xml:space="preserve">
+    <value>قسط شخصي</value>
+  </data>
+  <data name="Please_enter_the_4_digit_OTP_code_sent_on" xml:space="preserve">
+    <value>يرجى إدخال رمز OTP المكون من 4 أرقام والمرسل على</value>
+  </data>
+  <data name="pl_error" xml:space="preserve">
+    <value>يجب أن يكون القرض الشخصي أكبر من 0</value>
+  </data>
+  <data name="privacy_policy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="provide_detail" xml:space="preserve">
+    <value>يرجى تقديم التفاصيل التالية لحساب القسط المتاح</value>
+  </data>
+  <data name="remaining_amount" xml:space="preserve">
+    <value>القسط المتاح</value>
+  </data>
+  <data name="Resend_Now" xml:space="preserve">
+    <value>إعادة الإرسال الآن</value>
+  </data>
+  <data name="reset" xml:space="preserve">
+    <value>إعادة ضبط</value>
+  </data>
+  <data name="salary" xml:space="preserve">
+    <value>الراتب</value>
+  </data>
+  <data name="salary_error" xml:space="preserve">
+    <value>يجب أن يكون الراتب أكبر من 0</value>
+  </data>
+  <data name="sar" xml:space="preserve">
+    <value>ريال سعودي</value>
+  </data>
+  <data name="SelectedLanguage" xml:space="preserve">
+    <value>اختار اللغة</value>
+  </data>
+  <data name="select_language" xml:space="preserve">
+    <value>الرجاء اختيار لغة!</value>
+  </data>
+  <data name="Signin_Now" xml:space="preserve">
+    <value>قم بتسجيل دخولك الآن</value>
+  </data>
+  <data name="SignupNow" xml:space="preserve">
+    <value>سجل الآن</value>
+  </data>
+  <data name="Sign_Up" xml:space="preserve">
+    <value>قم بالتسجيل</value>
+  </data>
+  <data name="something" xml:space="preserve">
+    <value>هناك شئ خاطئ، يرجى المحاولة فى وقت لاحق!</value>
+  </data>
+  <data name="sort" xml:space="preserve">
+    <value>ترتيب</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>بنجاح</value>
+  </data>
+  <data name="terms" xml:space="preserve">
+    <value>الأحكام والشروط</value>
+  </data>
+  <data name="total_price" xml:space="preserve">
+    <value>السعر الكلي</value>
+  </data>
+  <data name="vehicles" xml:space="preserve">
+    <value>المركبات</value>
+  </data>
+  <data name="view_vehicles" xml:space="preserve">
+    <value>عرض المركبات</value>
+  </data>
+  <data name="vm" xml:space="preserve">
+    <value>فيزا/ماستر</value>
+  </data>
+  <data name="welcome" xml:space="preserve">
+    <value>أهلا بك</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="your_balance" xml:space="preserve">
+    <value>رصيدك</value>
+  </data>
+</root>

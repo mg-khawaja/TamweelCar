@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="38" package="com.tamweely.app" android:installLocation="auto" android:versionName="2.3.09">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
+	<application android:label="TamweelCar" android:theme="@style/MainTheme" android:icon="@drawable/tamweeli_icon">
+		<uses-library android:name="org.apache.http.legacy" android:required="false" />
+	</application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

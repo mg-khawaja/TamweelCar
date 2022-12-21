@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:i18n="clr-namespace:TamweelyMobileApp.Helpers;assembly=TamweelyMobileApp"
+             x:Class="TamweelyMobileApp.Views.MasterDetail.PrivacyPolicyPage" 
+             NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout Padding="0" Spacing="0">
+            <!--header-->
+            <Frame Padding="0" Margin="0">
+                <StackLayout Orientation="Horizontal" Padding="15,10" BackgroundColor="White">
+                    <Button HorizontalOptions="Start" x:Name="backButton" WidthRequest="20" BackgroundColor="Transparent"
+                                Clicked="backButton_Clicked"/>
+                    <Label Text="{i18n:Translate privacy_policy}" TextColor="Black" FontSize="21" HorizontalTextAlignment="Center" 
+                                       VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <WebView x:Name="webview" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

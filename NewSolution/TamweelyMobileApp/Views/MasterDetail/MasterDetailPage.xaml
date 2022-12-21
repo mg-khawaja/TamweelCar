@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms" 
+             xmlns:converter="clr-namespace:TamweelyMobileApp.Helpers" 
+             xmlns:i18n="clr-namespace:TamweelyMobileApp.Helpers;assembly=TamweelyMobileApp" 
+             xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms" 
+             xmlns:syncmaskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+             x:Class="TamweelyMobileApp.Views.MasterDetail.MasterDetailPage" 
+             NavigationPage.HasNavigationBar="False" BackgroundColor="#F0F0F0"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:AdUrlConverter x:Key="AdUrlConverter"/>
+            <converter:BoolConverter x:Key="BoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <navigationdrawer:SfNavigationDrawer x:Name="bottomNavigationDrawer" 
+                                     Position="Bottom" EnableSwipeGesture="False"
+                                     DrawerFooterHeight="0" 
+                                     DrawerHeaderHeight="0" DrawerHeight="{Binding DrawerHeight}" BackgroundColor="Transparent"
+                                                     HorizontalOptions="FillAndExpand" >
+            <navigationdrawer:SfNavigationDrawer.ContentView>
+                <navigationdrawer:SfNavigationDrawer x:Name="mainNavigationDrawer" DrawerWidth ="300" DrawerHeaderHeight="160" 
+                                         FlowDirection="{x:Static Device.FlowDirection}" HorizontalOptions="FillAndExpand">
+                    <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
+                        <StackLayout BackgroundColor="#F0F0F0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <!--<Image HeightRequest="100" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                       x:Name="drawerLogo" Source="{Binding Advertisement.ImageName, Converter={StaticResource AdUrlConverter}}"
+                       Aspect="AspectFill"/>-->
+                        </StackLayout>
+                    </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
+                    <navigationdrawer:SfNavigationDrawer.ContentView>
+                        <StackLayout BackgroundColor="#F0F0F0" Padding="0,15,15,0"
+                                     HorizontalOptions="FillAndExpand" x:Name="container">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Image HorizontalOptions="Start" x:Name="hamburger" WidthRequest="20">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="hamburger_Tapped"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <ComboBox:SfComboBox DisplayMemberPath="DisplayName" x:Name="PickerLanguages" VerticalOptions="Start" HeightRequest="45"
+                                                 FontFamily="Roboto" DropDownBackgroundColor="White" 
+                                                 HorizontalOptions="EndAndExpand" WidthRequest="100" DropDownWidth="100"
+                                                 ShowClearButton="False" ShowBorder="False" TextColor="Black">
+                                    <ComboBox:SfComboBox.CustomView>
+                                        <StackLayout Orientation="Horizontal" WidthRequest="100" Margin="0,0,0,-5" BackgroundColor="#F0F0F0">
+                                            <Image HeightRequest="13" HorizontalOptions="EndAndExpand"
+                                               x:Name="comboboxImage"/>
+                                            <Label TextTransform="Uppercase" TextColor="Black" VerticalOptions="CenterAndExpand" 
+                                               VerticalTextAlignment="Center" HorizontalOptions="End"
+                                               x:Name="comboboxLabel"/>
+                                        </StackLayout>
+                                    </ComboBox:SfComboBox.CustomView>
+                                </ComboBox:SfComboBox>
+                            </StackLayout>
+                            <ScrollView HorizontalOptions="FillAndExpand">
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label Text="{i18n:Translate welcome}" FontSize="16" TextColor="Black"/>
+                                    <Label Text="{Binding Name}" TextColor="Black" FontSize="32"/>
+                                    <Frame BackgroundColor="White" CornerRadius="10" Padding="0" HorizontalOptions="FillAndExpand" >
+                                        <Grid HeightRequest="146" BackgroundColor="#E4E4E4" >
+                                            <Image x:Name="imageDumy" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                           HeightRequest="60" WidthRequest="60"/>
+                                            <Image HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           Source="{Binding Advertisement.ImageName, Converter={StaticResource AdUrlConverter}}" Aspect="AspectFill">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding AdClickCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Grid>
+                                    </Frame>
+                                    <Grid>
+                                        <Frame BackgroundColor="White" CornerRadius="10" HorizontalOptions="FillAndExpand" 
+                                               Margin="0,10,0,30" Padding="0,0,0,44"
+                                       HasShadow="False">
+                                            <StackLayout Padding="24,10" Spacing="10">
+                                                <Label Text="{i18n:Translate provide_detail}" HorizontalOptions="CenterAndExpand" 
+                               HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center"/>
+                                                <Label Text="{i18n:Translate salary}" TextColor="Black" VerticalTextAlignment="Center"/>
+                                                <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" BackgroundColor="#F0F0F0">
+                                                    <syncmaskededit:SfMaskedEdit Watermark="0.00" BackgroundColor="Transparent" BorderColor="Transparent" 
+                                                                         Keyboard="Numeric" Value="{Binding Salary}" x:Name="salary"/>
+                                                </Frame>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{i18n:Translate al}" TextColor="Black" VerticalTextAlignment="Center"/>
+                                                    <Switch HorizontalOptions="EndAndExpand" HeightRequest="25" IsToggled="{Binding OnAL}"/>
+                                                </StackLayout>
+                                                <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" BackgroundColor="#F0F0F0">
+                                                    <syncmaskededit:SfMaskedEdit Watermark="0.00" BackgroundColor="Transparent" BorderColor="Transparent" Keyboard="Numeric"
+                                                                         Value="{Binding AL}" IsEnabled="{Binding OnAL}"
+                                                                         x:Name="al"/>
+                                                </Frame>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{i18n:Translate pl}" TextColor="Black" VerticalTextAlignment="Center"/>
+                                                    <Switch HorizontalOptions="EndAndExpand" HeightRequest="25" IsToggled="{Binding OnPL}"/>
+                                                </StackLayout>
+                                                <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" BackgroundColor="#F0F0F0" CornerRadius="5">
+                                                    <syncmaskededit:SfMaskedEdit Watermark="0.00" BackgroundColor="Transparent" BorderColor="Transparent" Keyboard="Numeric" 
+                                                                         Value="{Binding PL}" IsEnabled="{Binding OnPL}" x:Name="pl"/>
+                                                </Frame>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{i18n:Translate ml}" TextColor="Black" VerticalTextAlignment="Center"/>
+                                                    <Switch HorizontalOptions="EndAndExpand" HeightRequest="25" IsToggled="{Binding OnML}"/>
+                                                </StackLayout>
+                                                <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" BackgroundColor="#F0F0F0" CornerRadius="5">
+                                                    <syncmaskededit:SfMaskedEdit Watermark="0.00" BackgroundColor="Transparent" BorderColor="Transparent" x:Name="ml"
+                                                                         Keyboard="Numeric" Value="{Binding ML}" IsEnabled="{Binding OnML}"/>
+                                                </Frame>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{i18n:Translate cc}" TextColor="Black" VerticalTextAlignment="Center"/>
+                                                    <Label Text="{i18n:Translate vm}" TextColor="#A4A4A4" VerticalTextAlignment="Center"/>
+                                                    <Switch HorizontalOptions="EndAndExpand" HeightRequest="25" IsToggled="{Binding OnCC}"/>
+                                                </StackLayout>
+                                                <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" BackgroundColor="#F0F0F0" CornerRadius="5">
+                                                    <syncmaskededit:SfMaskedEdit Watermark="0.00" BackgroundColor="#F0F0F0" BorderColor="Transparent" 
+                                                                         Keyboard="Numeric" Value="{Binding CC}" x:Name="cc"
+                                                                                 IsEnabled="{Binding OnCC}"/>
+                                                </Frame>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" x:Name="Next_btn">
+                                            <Image Source="" x:Name="arrowBack" WidthRequest="60" HeightRequest="60"/>
+                                            <Image Source="" x:Name="arrowWhite" WidthRequest="22" HeightRequest="22" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="NextBtn_Tapped" CommandParameter="{Binding Source={x:Reference bottomNavigationDrawer}}"/>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </Grid>
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </navigationdrawer:SfNavigationDrawer.ContentView>
+                    <navigationdrawer:SfNavigationDrawer.DrawerContentView >
+                        <StackLayout BackgroundColor="White" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Name}" TextColor="#007FFF" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
+                           FontSize="21" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                            <ListView x:Name="listView" BackgroundColor="White" SelectionMode="None">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout HeightRequest="40" >
+                                                <Label Margin="10,7,10,0" Text="{Binding }" FontSize="16" Padding="10,0"
+                                               TextColor="#454545"/>
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="DrawerItem_Tapped"/>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                </navigationdrawer:SfNavigationDrawer>
+            </navigationdrawer:SfNavigationDrawer.ContentView>
+            <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                <Frame Padding="0" HorizontalOptions="FillAndExpand">
+                    <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="24" BackgroundColor="White">
+                        <Label Text="{i18n:Translate remaining_amount}" HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center" 
+                               FontSize="16"
+                               IsVisible="{Binding IsClaimVisible}"/>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="0" Margin="10">
+                            <Label Text="{i18n:Translate sar}" TextColor="#007FFF" FontSize="16" 
+                                   VerticalTextAlignment="End"
+                                   IsVisible="{Binding IsClaimVisible}"/>
+                            <Label Text="{Binding Balance}" HorizontalOptions="CenterAndExpand" FontSize="32" VerticalTextAlignment="Start"
+                                   TextColor="#454545"
+                                   IsVisible="{Binding IsClaimVisible}"/>
+                        </StackLayout>
+                        <Label Text="{i18n:Translate balance_claim}" HorizontalOptions="CenterAndExpand" FontSize="16" 
+                               TextColor="#D37373" Margin="0,0,0,20" HorizontalTextAlignment="Center" 
+                               IsVisible="{Binding IsClaimVisible}"/>
+                        <Label Text="{i18n:Translate amount_not_enough}" HorizontalOptions="CenterAndExpand" FontSize="16" 
+                               TextColor="#D37373" Margin="0,0,0,20" HorizontalTextAlignment="Center" 
+                               IsVisible="{Binding IsClaimVisible, Converter={StaticResource Key=BoolConverter}}"/>
+                        <Button x:Name="ViewVehicles" Text="{i18n:Translate view_vehicles}" TextColor="White" 
+                                BackgroundColor="#007FFF" CornerRadius="30" HeightRequest="57" FontSize="16" 
+                                WidthRequest="120" Command="{Binding GoToVehiclesCommand}" 
+                                IsVisible="{Binding VehiclesVisible}"/>
+                    </StackLayout>
+                </Frame>
+            </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        </navigationdrawer:SfNavigationDrawer>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}">
+            <ActivityIndicator HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                   IsRunning="True" IsVisible="true" IsEnabled="true"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:helpers="clr-namespace:TamweelyMobileApp.Helpers"
+             mc:Ignorable="d"
+             xmlns:i18n="clr-namespace:TamweelyMobileApp.Helpers" xmlns:syncmaskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms" xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             x:Class="TamweelyMobileApp.Views.LoginPage"
+             BackgroundColor="#F0F0F0" NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand">
+            <Image Source="tamweeli_icon.png" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,60,0,0" 
+                   HeightRequest="180"/>
+            <Grid VerticalOptions="CenterAndExpand">
+                <Frame BackgroundColor="White" CornerRadius="10" VerticalOptions="CenterAndExpand" Margin="24,0,24,30" Padding="24,10,24,44"
+                       HasShadow="False">
+                    <StackLayout>
+                        <Label Text="{i18n:Translate Login}" HorizontalOptions="Center" FontFamily="Roboto" TextColor="#454545"
+                               FontSize="18" Margin="0,10,0,15"/>
+                        <Label Text="{i18n:Translate Mobile}"   Padding="0,10,0,0" FontFamily="Roboto" TextColor="#454545"></Label>
+                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" BackgroundColor="#F0F0F0">
+                            <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding SelectedCountryCode.dial_code}" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" Padding="10,0,10,0" 
+                                               TextColor="Black" HorizontalTextAlignment="Start">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectCountryCodeCommand}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <BoxView BackgroundColor="Black" WidthRequest="1" HeightRequest="25" VerticalOptions="Center"
+                                         Margin="0,0,2,0"/>
+                                <syncmaskededit:SfMaskedEdit x:Name="maskedEdit" Mask="00000000000" PromptChar=" " Watermark="12345678901"
+                                                         BackgroundColor="Transparent" BorderColor="Transparent" Keyboard="Numeric"
+                                                             HorizontalOptions="FillAndExpand" Value="{Binding Phone}" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" x:Name="Next_btn">
+                    <Image Source="" x:Name="arrowBack" WidthRequest="60" HeightRequest="60"/>
+                    <Image Source="" x:Name="arrowWhite" WidthRequest="22" HeightRequest="22" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Login_Tapped"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Grid>
+            <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,40">
+                <Label HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span  Text="{i18n:Translate Dont_have_an_account}"/>
+                            <Span   Text="{i18n:Translate SignupNow}"  FontAttributes="Bold" TextColor="#007FFF"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoSignUpCommand}"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                   IsRunning="True" IsVisible="true" IsEnabled="true"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

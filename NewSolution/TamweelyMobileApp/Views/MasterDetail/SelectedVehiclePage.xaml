@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms" 
+             xmlns:converter="clr-namespace:TamweelyMobileApp.Helpers"
+             x:Class="TamweelyMobileApp.Views.MasterDetail.SelectedVehiclePage" 
+             xmlns:i18n="clr-namespace:TamweelyMobileApp.Helpers;assembly=TamweelyMobileApp" xmlns:syncfusion1="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             NavigationPage.HasNavigationBar="False" BackgroundColor="#F0F0F0"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms" xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             ios:Page.UseSafeArea="true"
+             xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard" xmlns:syncmaskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms" xmlns:range="clr-namespace:Syncfusion.SfRangeSlider.XForms;assembly=Syncfusion.SfRangeSlider.XForms">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:VehicleImageUrlConverter x:Key="linkConverter"/>
+            <converter:BoolConverter x:Key="boolConverter"/>
+            <converter:DblToMillionConverter x:Key="DblToMillionConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout Padding="0" Spacing="0">
+                    <!--header-->
+                    <Frame Padding="0" Margin="0,0,0,10">
+                        <Grid Padding="15,10" BackgroundColor="White">
+                            <Image HorizontalOptions="Start" x:Name="backButton" WidthRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="backButton_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <StackLayout HorizontalOptions="CenterAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label TextColor="Black" FontSize="21" 
+                                           VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Vehicle.MakeName}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding Vehicle.ModelName}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Margin="-5" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="{Binding Vehicle.Year}" TextColor="Black" FontSize="10"/>
+                                    <BoxView BackgroundColor="#B2B2B2" WidthRequest="1" HeightRequest="7"/>
+                                    <Label Text="{Binding Vehicle.BodyTypeName}" TextColor="Black" FontSize="10"/>
+                                    <BoxView BackgroundColor="#B2B2B2" WidthRequest="1" HeightRequest="7"/>
+                                    <Label Text="{Binding Vehicle.EngineTypeName}" TextColor="Black" FontSize="10"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                    <!--vehicle-->
+                    <Frame BackgroundColor="White" CornerRadius="10" Padding="0" HorizontalOptions="FillAndExpand"
+                           Margin="10,0,10,10">
+                        <StackLayout Spacing="0">
+                            <Grid HeightRequest="250" BackgroundColor="#E4E4E4" >
+                                <syncfusion:SfRotator x:Name="rotator" EnableAutoPlay="False"
+                                                                  ItemsSource="{Binding Vehicle.VehicleImages}"
+                                                                  NavigationDirection="Horizontal" NavigationStripMode="Dots" 
+                                                                  BackgroundColor="#ececec" SelectedDotColor="#007FFF"
+                                                                  UnselectedDotColor="White">
+                                    <syncfusion:SfRotator.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid BackgroundColor="#E4E4E4">
+                                                <Image x:Name="imageDumy" HorizontalOptions="CenterAndExpand" 
+                                                                   VerticalOptions="CenterAndExpand" Source="imageDumy.png"
+                                                                   HeightRequest="60" WidthRequest="60"/>
+                                                <Image Source="{Binding FileName, Converter={StaticResource linkConverter}}" 
+                                                                   Aspect="AspectFill" HorizontalOptions="FillAndExpand"
+                                                                   VerticalOptions="FillAndExpand" BackgroundColor="Transparent"/>
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </syncfusion:SfRotator.ItemTemplate>
+                                </syncfusion:SfRotator>
+                            </Grid>
+                            <StackLayout Padding="10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="CenterAndExpand">
+                                    <Label FontSize="12" HorizontalOptions="CenterAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{i18n:Translate car_value}" TextColor="#939393"/>
+                                                <Span Text=" " TextColor="#939393"/>
+                                                <Span Text="{i18n:Translate sar}" TextColor="#007FFF"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Grid >
+                                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" 
+                                           BackgroundColor="#F0F0F0" Margin="0,0,0,5"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding CarValue}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"/>
+                                    </Grid>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="CenterAndExpand">
+                                    <Label FontSize="12" HorizontalOptions="CenterAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{i18n:Translate total_price}" TextColor="#939393"/>
+                                                <Span Text=" " TextColor="#939393"/>
+                                                <Span Text="{i18n:Translate sar}" TextColor="#007FFF"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding TotalPrice, Converter={StaticResource DblToMillionConverter}}" 
+                                           HorizontalOptions="CenterAndExpand" TextColor="Black"
+                                           VerticalOptions="CenterAndExpand" FontSize="16"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="CenterAndExpand">
+                                    <Label FontSize="12" HorizontalOptions="CenterAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{i18n:Translate installment}" TextColor="#939393"/>
+                                                <Span Text=" " TextColor="#939393"/>
+                                                <Span Text="{i18n:Translate sar}" TextColor="#007FFF"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding InstallmentSelected, Converter={StaticResource DblToMillionConverter}}" 
+                                           HorizontalOptions="CenterAndExpand" TextColor="Black"
+                                           VerticalOptions="CenterAndExpand" FontSize="16"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <!--controls-->
+                    <Frame BackgroundColor="White" CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand"
+                           Margin="10,0,10,10">
+                        <StackLayout Spacing="10">
+                            <StackLayout Spacing="0">
+                                <Label Text="{i18n:Translate no_of_months}" FontSize="14" TextColor="Black"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="210"/>
+                                        <ColumnDefinition Width="AUTO"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.RowSpan="2" Grid.Column="0" Grid.Row="0">
+                                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" 
+                                           BackgroundColor="#F0F0F0" Margin="0,5"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding MonthsSelected}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric" MaskType="RegEx" Mask="\d{6}" PromptChar=" "/>
+                                    </Grid>
+                                    <Slider HorizontalOptions="FillAndExpand" MinimumTrackColor="#C4C4C4"
+                                            MaximumTrackColor="#C4C4C4" Minimum="{Binding MonthsMin}" Maximum="{Binding MonthsMax}" 
+                                            DragCompleted="MonthsSlider_DragCompleted"
+                                            VerticalOptions="Start" Grid.ColumnSpan="2" Grid.Column="1" HeightRequest="30"
+                                                         WidthRequest="200" x:Name="MonthsSlider"/>
+                                    <Label Text="{Binding MonthsMin}" FontSize="14" TextColor="Black" Grid.Column="1"
+                                       Grid.Row="1" Margin="10,0,0,0" x:Name="MonthsMin"/>
+                                    <Label Text="{Binding MonthsMax}" FontSize="14" TextColor="Black" Grid.Column="2"
+                                       Grid.Row="1" Margin="0,0,10,0" x:Name="MonthsMax" HorizontalOptions="Start"/>
+                                </Grid>
+                            </StackLayout>
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{i18n:Translate interest}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsInterestPercVisible, Converter={StaticResource boolConverter}}"/>
+                                    <Label Text="{i18n:Translate interest_perc}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsInterestPercVisible}"/>
+                                    <Switch IsToggled="{Binding IsInterestPercVisible}" Margin="0,-5,0,0"/>
+                                    
+                                </StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="210"/>
+                                        <ColumnDefinition Width="AUTO"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.RowSpan="2" Grid.Column="0" Grid.Row="0">
+                                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" 
+                                           BackgroundColor="#F0F0F0" Margin="0,5"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            IsVisible="{Binding IsInterestPercVisible}"
+                                            BorderColor="Transparent" Value="{Binding InterestPercSelected}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            IsVisible="{Binding IsInterestPercVisible,Converter={StaticResource boolConverter}}"
+                                            BorderColor="Transparent" Value="{Binding Interest}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"/>
+                                    </Grid>
+                                    <Label FontSize="10" TextColor="Black" IsVisible="{Binding IsInterestPercVisible}"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0" 
+                                           Grid.ColumnSpan="2" Grid.Column="1"
+                                           VerticalTextAlignment="Start">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{i18n:Translate sar}" TextColor="#007FFF"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding Interest, Converter={StaticResource DblToMillionConverter}}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="10" TextColor="Black" IsVisible="{Binding IsInterestPercVisible, 
+                                        Converter={StaticResource boolConverter}}" 
+                                           Grid.ColumnSpan="2" Grid.Column="1"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0"
+                                           VerticalTextAlignment="Start">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding InterestPercSelected}"/>
+                                                <Span Text=" %" TextColor="#007FFF"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Slider HorizontalOptions="FillAndExpand" MaximumTrackColor="#C4C4C4"
+                                            Minimum="{Binding InterestMin}" MinimumTrackColor="#C4C4C4"
+                                                         Maximum="{Binding InterestMax}" 
+                                            DragCompleted="InterestSlider_DragCompleted"
+                                        VerticalOptions="Start" Grid.ColumnSpan="2" Grid.Column="1" HeightRequest="30"
+                                                         WidthRequest="200" x:Name="InterestSlider" IsTabStop="True"/>
+                                    
+                                    <Label Text="{Binding InterestMin}" FontSize="14" TextColor="White" Grid.Column="1"
+                                       Grid.Row="1" Margin="10,0,0,0" x:Name="InterestMin"/>
+                                    <Label Text="{Binding InterestMax}" FontSize="14" TextColor="White" Grid.Column="2"
+                                       Grid.Row="1" Margin="0,0,10,0" HorizontalOptions="Start" x:Name="InterestMax"/>
+                                </Grid>
+                            </StackLayout>
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{i18n:Translate insurance_perc}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsInsurancePercVisible}"/>
+                                    <Label Text="{i18n:Translate insurance}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsInsurancePercVisible, Converter={StaticResource boolConverter}}"/>
+                                    <Switch IsToggled="{Binding IsInsurancePercVisible}" Margin="0,-5,0,0"/>
+                                    
+                                </StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="210"/>
+                                        <ColumnDefinition Width="AUTO"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.RowSpan="2" Grid.Column="0" Grid.Row="0">
+                                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" 
+                                           BackgroundColor="#F0F0F0" Margin="0,5"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding InsurancePercSelected}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"
+                                            IsVisible="{Binding IsInsurancePercVisible}"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding Insurance}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"
+                                            IsVisible="{Binding IsInsurancePercVisible, 
+                                            Converter={StaticResource boolConverter}}"/>
+                                    </Grid>
+                                    <Label FontSize="10" TextColor="Black"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0" 
+                                           Grid.ColumnSpan="2" Grid.Column="1"
+                                           VerticalTextAlignment="Start" IsVisible="{Binding IsInsurancePercVisible}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{i18n:Translate sar}" TextColor="#007FFF"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding Insurance, Converter={StaticResource DblToMillionConverter}}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="10" TextColor="Black"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0"
+                                           VerticalTextAlignment="Start" IsVisible="{Binding IsInsurancePercVisible, 
+                                        Converter={StaticResource boolConverter}}" Grid.ColumnSpan="2" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding InsurancePercSelected}"/>
+                                                <Span Text=" %" TextColor="#007FFF"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Slider HorizontalOptions="FillAndExpand" MaximumTrackColor="#C4C4C4"
+                                            MinimumTrackColor="#C4C4C4" Minimum="{Binding InsuranceMin}"              
+                                            Maximum="{Binding InsuranceMax}" 
+                                            DragCompleted="InsuranceSlider_DragCompleted"
+                                        VerticalOptions="Start" Grid.ColumnSpan="2" Grid.Column="1" HeightRequest="30"
+                                                         WidthRequest="200" x:Name="InsuranceSlider"/>
+                                    <Label Text="{Binding InsuranceMin}" FontSize="14" TextColor="White" Grid.Column="1"
+                                       Grid.Row="1" Margin="10,0,0,0" x:Name="InsuranceMin"/>
+                                    <Label Text="{Binding InsuranceMax}" FontSize="14" TextColor="White" Grid.Column="2"
+                                       Grid.Row="1" Margin="0,0,10,0" x:Name="InsuranceMax" HorizontalOptions="Start"/>
+                                </Grid>
+                            </StackLayout>
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{i18n:Translate installment}" FontSize="14" TextColor="Black"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <!--<Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="240"/>
+                                    </Grid.ColumnDefinitions>-->
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" 
+                                           BackgroundColor="#F0F0F0" Margin="0,5" HorizontalOptions="FillAndExpand"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding InstallmentSelected}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric" IsEnabled="False"
+                                            HorizontalOptions="FillAndExpand"/>
+                                    </Grid>
+                                    <StackLayout>
+                                        <Slider HorizontalOptions="FillAndExpand" MaximumTrackColor="#C4C4C4"
+                                            MinimumTrackColor="#C4C4C4" Minimum="{Binding InstallmentMin}"              
+                                            Maximum="{Binding InstallmentMax}" 
+                                            DragCompleted="InstallmentSlider_DragCompleted"
+                                        VerticalOptions="Start"  Grid.Column="1" HeightRequest="30"
+                                                         WidthRequest="240" x:Name="InstallmentSlider" IsEnabled="False"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding InstallmentMin}" FontSize="14" TextColor="Black" 
+                                        Margin="10,0,10,0" x:Name="InstallmentMin" />
+                                            <Label Text="" FontSize="14" TextColor="Black"
+                                       Margin="10,0,10,0" x:Name="InstallmentMax"  HorizontalOptions="EndAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding InstallmentMax}"/>
+                                                        <Span Text=" balance amount"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label Text="" FontSize="14" TextColor="Black"
+                                       Margin="10,0,10,0" x:Name="InstallmentMaxArabic"  HorizontalOptions="StartAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding InstallmentMax}"/>
+                                                        <Span Text=" "/>
+                                                        <Span Text="{i18n:Translate balance_amount}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label Text="{Binding InstallmentMin}" FontSize="14" TextColor="Black" 
+                                        Margin="10,0,10,0" x:Name="InstallmentMinArabic" />
+                                            
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{i18n:Translate down_payment}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsDownPayPercVisible, Converter={StaticResource boolConverter}}"/>
+                                    <Label Text="{i18n:Translate down_payment_perc}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsDownPayPercVisible}"/>
+                                    <Switch IsToggled="{Binding IsDownPayPercVisible}" Margin="0,-5,0,0"/>
+                                    
+                                </StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="210"/>
+                                        <ColumnDefinition Width="AUTO"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.RowSpan="2" Grid.Column="0" Grid.Row="0">
+                                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" 
+                                           BackgroundColor="#F0F0F0" Margin="0,5"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding DownPayPercSelected}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"
+                                            IsVisible="{Binding IsDownPayPercVisible}"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding DownPay}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric" 
+                                            IsVisible="{Binding IsDownPayPercVisible,Converter={StaticResource boolConverter}}"/>
+                                    </Grid>
+                                    <Label FontSize="10" TextColor="Black"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0"
+                                           VerticalTextAlignment="Start"
+                                           IsVisible="{Binding IsDownPayPercVisible}"
+                                           Grid.ColumnSpan="2" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{i18n:Translate sar}" TextColor="#007FFF"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding DownPay, Converter={StaticResource DblToMillionConverter}}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="10" TextColor="Black"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0"
+                                           VerticalTextAlignment="Start"
+                                           IsVisible="{Binding IsDownPayPercVisible, Converter={StaticResource boolConverter}}"
+                                           Grid.ColumnSpan="2" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding DownPayPercSelected}"/>
+                                                <Span Text=" %" TextColor="#007FFF"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Slider HorizontalOptions="FillAndExpand" MaximumTrackColor="#C4C4C4" 
+                                            MinimumTrackColor="#C4C4C4" Minimum="{Binding DownPayMin}"              
+                                            Maximum="{Binding DownPayMax}" 
+                                            DragCompleted="DownPaySlider_DragCompleted"
+                                        VerticalOptions="Start" Grid.ColumnSpan="2" Grid.Column="1" HeightRequest="30"
+                                                         WidthRequest="200" x:Name="DownPaySlider"/>
+                                    <Label Text="{Binding DownPayMin}" FontSize="14" TextColor="Black" Grid.Column="1"
+                                       Grid.Row="1" Margin="10,0,0,0" x:Name="DownPayMin"/>
+                                    <Label Text="{Binding DownPayMax}" FontSize="14" TextColor="Black" Grid.Column="2"
+                                       Grid.Row="1" Margin="0,0,10,0" x:Name="DownPayMax"  HorizontalOptions="Start"/>
+                                </Grid>
+                            </StackLayout>
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{i18n:Translate last_payment}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsLastPayPercVisible, Converter={StaticResource boolConverter}}"/>
+                                    <Label Text="{i18n:Translate last_payment_perc}" FontSize="14" TextColor="Black"
+                                           IsVisible="{Binding IsLastPayPercVisible}"/>
+                                    <Switch IsToggled="{Binding IsLastPayPercVisible}" Margin="0,-5,0,0"/>
+                                    
+                                </StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="210"/>
+                                        <ColumnDefinition Width="AUTO"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.RowSpan="2" Grid.Column="0" Grid.Row="0">
+                                        <Frame Padding="{OnPlatform '0', iOS='10'}" HasShadow="False" CornerRadius="5" 
+                                           BackgroundColor="#F0F0F0" Margin="0,5"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding LastPayPercSelected}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"
+                                            IsVisible="{Binding IsLastPayPercVisible}"/>
+                                        <syncmaskededit:SfMaskedEdit 
+                                            BorderColor="Transparent" Value="{Binding LastPay}" HeightRequest="35"
+                                            HorizontalTextAlignment="{Binding TextAlignment}" FontSize="14" Margin="5,0"
+                                            WidthRequest="90" Keyboard="Numeric"
+                                            IsVisible="{Binding IsLastPayPercVisible,Converter={StaticResource boolConverter}}"/>
+                                    </Grid>
+                                    <Label FontSize="10" TextColor="Black"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0"
+                                           VerticalTextAlignment="Start"
+                                           IsVisible="{Binding IsLastPayPercVisible}"
+                                           Grid.ColumnSpan="2" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{i18n:Translate sar}" TextColor="#007FFF"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding LastPay, Converter={StaticResource DblToMillionConverter}}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="10" TextColor="Black"
+                                           HorizontalOptions="CenterAndExpand" Margin="10,-10,10,0"
+                                           VerticalTextAlignment="Start"
+                                           IsVisible="{Binding IsLastPayPercVisible,Converter={StaticResource boolConverter}}"
+                                           Grid.ColumnSpan="2" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding LastPayPercSelected}"/>
+                                                <Span Text=" %" TextColor="#007FFF"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Slider HorizontalOptions="FillAndExpand" MaximumTrackColor="#C4C4C4"
+                                            MinimumTrackColor="#C4C4C4" Minimum="{Binding LastPayMin}"             
+                                            Maximum="{Binding LastPayMax}" 
+                                            DragCompleted="LastPaySlider_DragCompleted"
+                                        VerticalOptions="Start" Grid.ColumnSpan="2" Grid.Column="1" HeightRequest="30"
+                                                         WidthRequest="200" x:Name="LastPaySlider"/>
+                                    <Label Text="{Binding LastPayMin}" FontSize="14" TextColor="Black" Grid.Column="1"
+                                       Grid.Row="1" Margin="10,0,0,0" x:Name="LastPayMin"/>
+                                    <Label Text="{Binding LastPayMax}" FontSize="14" TextColor="Black" Grid.Column="2"
+                                       Grid.Row="1" Margin="0,0,10,0" x:Name="LastPayMax" HorizontalOptions="Start"/>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                       IsRunning="True" IsVisible="true" IsEnabled="true"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

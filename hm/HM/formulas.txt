@@ -1,0 +1,23 @@
+DownPay = (CarValue x DownPay%)
+
+LastPay = TotalPrice - (Installment x InstCount) - DownPay
+
+LeaseAmount = CarValue - DownPay
+
+InstCount = Months - 1
+
+Interest = (LeaseAmount x Interest%) x Months/12
+
+Insurance = (CarValue x Insurance%) x Months/12
+
+---------------------------------------------------
+
+MonthlyInstallment = (LeaseAmount + Interest + Insurance - LastPay) / InstCount
+
+TotalPrice = (MonthlyInstallment x InstCount) + DownPay + LastPay
+
+---------------------------------------------------
+
+LastPay = TotalPrice - (MonthlyInstallment x InstCount) - DownPay
+
+LastPay% = (LastPay x 100) / CarValue

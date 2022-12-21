@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms" 
+             xmlns:converter="clr-namespace:TamweelyMobileApp.Helpers"
+             x:Class="TamweelyMobileApp.Views.MasterDetail.VehiclesPage" 
+             xmlns:local="clr-namespace:TamweelyMobileApp.ViewModels" 
+             xmlns:i18n="clr-namespace:TamweelyMobileApp.Helpers;assembly=TamweelyMobileApp" xmlns:syncfusion1="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             NavigationPage.HasNavigationBar="False" BackgroundColor="#F0F0F0"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms" xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             ios:Page.UseSafeArea="true"
+             xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:VehicleImageUrlConverter x:Key="linkConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <Grid>
+            <navigationdrawer:SfNavigationDrawer x:Name="bottomNavigationDrawer" 
+                                     Position="Bottom" EnableSwipeGesture="False"
+                                     DrawerFooterHeight="0" 
+                                     DrawerHeaderHeight="0" DrawerHeight="400" BackgroundColor="Transparent"
+                                                     HorizontalOptions="FillAndExpand" >
+                <navigationdrawer:SfNavigationDrawer.ContentView>
+                    <Grid>
+                        <StackLayout Padding="0">
+                            <!--header-->
+                            <Frame Padding="0" Margin="0">
+                                <StackLayout Orientation="Horizontal" Padding="15,10" BackgroundColor="White">
+                                    <Image HorizontalOptions="Start" x:Name="backButton" WidthRequest="20">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="backButton_Tapped"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <StackLayout HorizontalOptions="CenterAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{i18n:Translate vehicles}" TextColor="Black" FontSize="21" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                                            <Frame Padding="7,2" CornerRadius="10" BackgroundColor="#E4E4E4" VerticalOptions="Center" HeightRequest="13" Margin="0,3,0,0">
+                                                <Label Text="{Binding TotalVehicles}" TextColor="Black" FontSize="10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                            </Frame>
+                                        </StackLayout>
+                                        <Label TextColor="Black" FontSize="10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                                   Margin="0,-5,0,0">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{i18n:Translate your_balance}"/>
+                                                    <Span Text=" : SAR "/>
+                                                    <Span Text="{Binding Balance}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <Image HorizontalOptions="End" x:Name="filterButton" WidthRequest="20">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="filterButton_Tapped"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </Frame>
+                            <!--vehicles list-->
+                            <syncfusion1:SfListView x:Name="listView" LoadMoreOption="Auto" ItemSize="350" SelectionMode="None"
+                                        LoadMoreCommand="{Binding LoadMoreItemsCommand}" ItemsSource="{Binding Vehicles}"
+                                        LoadMoreCommandParameter="{Binding Source={x:Reference listView}}" MinimumHeightRequest="500"
+                                                    >
+                                <syncfusion1:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="White" CornerRadius="10" Padding="0" 
+                                               Margin="10,5,10,5" HorizontalOptions="FillAndExpand">
+                                            <StackLayout Spacing="0">
+                                                <Grid HeightRequest="250" BackgroundColor="#E4E4E4" >
+                                                    <syncfusion:SfRotator x:Name="rotator" EnableAutoPlay="False"
+                                                                  ItemsSource="{Binding VehicleImages}"
+                                                                  NavigationDirection="Horizontal" NavigationStripMode="Dots" 
+                                                                  BackgroundColor="#ececec" SelectedDotColor="#007FFF"
+                                                                  UnselectedDotColor="White">
+                                                        <syncfusion:SfRotator.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid BackgroundColor="#E4E4E4">
+                                                                    <Image x:Name="imageDumy" HorizontalOptions="CenterAndExpand" 
+                                                                   VerticalOptions="CenterAndExpand" Source="imageDumy.png"
+                                                                   HeightRequest="60" WidthRequest="60"/>
+                                                                    <Image Source="{Binding FileName, Converter={StaticResource linkConverter}}" 
+                                                                   Aspect="AspectFill" HorizontalOptions="FillAndExpand"
+                                                                   VerticalOptions="FillAndExpand" BackgroundColor="Transparent"/>
+                                                                </Grid>
+
+                                                            </DataTemplate>
+                                                        </syncfusion:SfRotator.ItemTemplate>
+                                                        <syncfusion:SfRotator.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource 
+                                                    AncestorType={x:Type local:VehiclesViewModel}}, Path=VehicleSelectedCommand}" 
+                                                                      CommandParameter="{Binding .}"/>
+                                                        </syncfusion:SfRotator.GestureRecognizers>
+                                                    </syncfusion:SfRotator>
+                                                </Grid>
+                                                <StackLayout Padding="10" HorizontalOptions="FillAndExpand">
+                                                    <Label Text="Toyota Corolla Altis 1.6" FontSize="16" TextColor="Black">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding MakeName}"/>
+                                                                <Span Text=" "/>
+                                                                <Span Text="{Binding ModelName}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding Year}" TextColor="Black"/>
+                                                        <BoxView BackgroundColor="#B2B2B2" WidthRequest="1" HeightRequest="20"/>
+                                                        <Label Text="{Binding BodyTypeName}" TextColor="Black"/>
+                                                        <BoxView BackgroundColor="#B2B2B2" WidthRequest="1" HeightRequest="20"/>
+                                                        <Label Text="{Binding EngineTypeName}" TextColor="Black"/>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                        <StackLayout HorizontalOptions="CenterAndExpand">
+                                                            <Label Text="{i18n:Translate total_price}" TextColor="#939393" HorizontalTextAlignment="Center" Margin="0,5,0,-5"/>
+                                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                                <Label Text="{i18n:Translate sar}" FontSize="12" TextColor="#007FFF" VerticalOptions="End" Margin="0,0,0,2"/>
+                                                                <Label Text="{Binding TotalPrice}" FontSize="21" TextColor="Black"/>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></StackLayout>
+                                                        <StackLayout HorizontalOptions="End">
+                                                            <Label Text="{i18n:Translate monthly_installment}" TextColor="#939393" HorizontalTextAlignment="Center" Margin="0,5,0,-5"/>
+                                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                                <Label Text="{i18n:Translate sar}" FontSize="12" TextColor="#007FFF" VerticalOptions="End" Margin="0,0,0,2"/>
+                                                                <Label Text="{Binding MonthlyInstallments}" FontSize="21" TextColor="Black"/>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource 
+                                                    AncestorType={x:Type local:VehiclesViewModel}}, Path=VehicleSelectedCommand}" 
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </DataTemplate>
+                                </syncfusion1:SfListView.ItemTemplate>
+                            </syncfusion1:SfListView>
+                            <!--<Grid VerticalOptions="FillAndExpand">
+                    <ScrollView>
+                        <StackLayout Padding="15,5,15,15">
+                            <StackLayout BindableLayout.ItemsSource="{Binding Vehicles}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>-->
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="20,0" 
+                             IsVisible="{Binding NoVehicles}">
+                            <Label Text="{i18n:Translate no_vehicles}" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
+                           VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" TextColor="#454545" FontSize="16"/>
+                        </StackLayout>
+                    </Grid>
+                </navigationdrawer:SfNavigationDrawer.ContentView>
+                <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                    <Frame Padding="0" HorizontalOptions="FillAndExpand">
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                     Padding="24" BackgroundColor="White" Spacing="15">
+                            <Label Text="{i18n:Translate filter}" HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center" 
+                               FontSize="20"/>
+                            <StackLayout>
+                                <Label Text="Make" TextColor="Black"/>
+                                <ComboBox:SfComboBox x:Name="MakeFilter" VerticalOptions="Start" HeightRequest="45"
+                                                 FontFamily="Roboto" DropDownBackgroundColor="#E4E4E4" 
+                                                 HorizontalOptions="FillAndExpand" BackgroundColor="#E4E4E4"
+                                                 ShowClearButton="False" TextColor="Black" DataSource="{Binding MakeList}"
+                                                     DisplayMemberPath="Description"
+                                                     SelectedItem="{Binding SelectedMake}" MaximumDropDownHeight="200">
+                                </ComboBox:SfComboBox>
+                            </StackLayout>
+                            <Label Text="{i18n:Translate sort}" HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center" 
+                               FontSize="20"/>
+                            <StackLayout>
+                                <RadioButton Content="{i18n:Translate high_to_low}" FontSize="16" TextColor="Black" 
+                                             IsChecked="{Binding IsHigh}"/>
+                                <RadioButton Content="{i18n:Translate low_to_high}" FontSize="16" TextColor="Black" 
+                                             IsChecked="{Binding IsLow}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                                <Button Text="{i18n:Translate reset}" TextColor="#007FFF" 
+                                BackgroundColor="#E4E4E4" CornerRadius="30" HeightRequest="57" FontSize="16" 
+                                HorizontalOptions="FillAndExpand" Command="{Binding ResetCommand}"
+                                        CommandParameter="{Binding Source={x:Reference listView}}"/>
+                                <Button Text="{i18n:Translate apply}" TextColor="White" 
+                                BackgroundColor="#007FFF" CornerRadius="30" HeightRequest="57" FontSize="16" 
+                                HorizontalOptions="FillAndExpand" Command="{Binding FilterCommand}"
+                                        CommandParameter="{Binding Source={x:Reference listView}}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+            </navigationdrawer:SfNavigationDrawer>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                       IsRunning="True" IsVisible="true" IsEnabled="true"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
